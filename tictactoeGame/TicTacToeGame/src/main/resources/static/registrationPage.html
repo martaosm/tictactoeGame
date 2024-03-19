@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/global.js"></script>
+  <link rel="stylesheet" href="css/registerPage.css">
+  <title>Register</title>
+</head>
+<body>
+<div id="registerBox">
+<form id="loginForm">
+<!--  <label for="email">Email:</label>-->
+  Email: <input class="inputField" type="text" id="email" name="email" required><br>
+<!--  <label for="username">Username:</label>-->
+  Username: <input class="inputField" type="text" id="username" name="username" required><br>
+<!--  <label for="password">Password:</label>-->
+  Password: <input class="inputField" type="password" id="password" name="password" required><br>
+  <button class="btn" id="registerBtn" type="button" onclick="register()">Register</button>
+</form>
+</div>
+<script>
+  function register() {
+    let login = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    let email = document.getElementById("email").value;
+    fetch(myGlobalVariable + "/register", {
+      method: "POST",
+      body: JSON.stringify({
+        username: login,
+        password: password,
+        email: email
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    }).then((response) => response.json())
+            .then((json) => {
+              alert("Successfully registered!")
+              location.href = "index.html";
+            })
+  }
+</script>
+</body>
+</html>
